@@ -44,7 +44,8 @@ $routes->group(
         // Format parameter goes for all endpoints.
         $routes->parameters()->path('format')->enum(['json'])->describe('Output format')->default('json');
 
-
+        // Routes are set by controllers
+        \App\Http\Api\V1\Controllers\DiscountController::setRoutes($routes);
 
     }
 );
