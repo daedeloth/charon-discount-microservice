@@ -27,8 +27,7 @@ class OrderResourceDefinition extends ResourceDefinition
             ->writeable(true, true)
             ->visible(true, true);
 
-        $this->relationship('items', OrderItemResourceDefinition::class)
-            ->display('items')
+        $this->relationship('orderItems', OrderItemResourceDefinition::class)
             ->writeable(true, true)
             ->visible(true, true);
 
