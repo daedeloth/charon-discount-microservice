@@ -2,7 +2,7 @@
 
 namespace App\Http\Api\V1\ResourceDefinitions;
 
-use App\Models\Discount;
+use App\Models\Discounts\AbstractDiscount;
 use CatLab\Charon\Models\ResourceDefinition;
 
 /**
@@ -16,8 +16,13 @@ class DiscountResourceDefinition extends ResourceDefinition
      */
     public function __construct()
     {
-        parent::__construct(Discount::class);
+        parent::__construct(AbstractDiscount::class);
 
+        $this->field('reason')
+            ->visible(true, true);
 
+        $this->field('discount:{context.order}')
+            ->display('discount')
+            ->visible(true, true);
     }
 }

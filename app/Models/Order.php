@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Services\CustomerService;
+
 /**
  * Class Order
  * @package App\Models
@@ -9,9 +11,9 @@ namespace App\Models;
 class Order extends Model
 {
     /**
-     * @var int
+     * @var Customer
      */
-    protected $customerId;
+    protected $customer;
 
     /**
      * @var float
@@ -29,8 +31,20 @@ class Order extends Model
      */
     public function setCustomerId($id)
     {
-        $this->customerId = $id;
+        // Singeltones could be used, yes! Or a smarter "service" factory.
+        $customerService = new CustomerService();
+        $customer = $customerService->getFromId($id);
+
+        $this->customer = $customer;
         return $this;
+    }
+
+    /**
+     * @return Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 
     /**
@@ -59,5 +73,14 @@ class Order extends Model
     public function getOrderItems()
     {
         return $this->orderItems;
+    }
+
+    /**
+     * @toto this could probably be calculated from the items.
+     * @return float
+     */
+    public function getTotal()
+    {
+        return $this->total;
     }
 }

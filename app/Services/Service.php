@@ -56,7 +56,9 @@ abstract class Service
     public function getFromId($id)
     {
         foreach ($this->items as $v) {
-            if ($v->getId() === $id) {
+            if ($v->getId() == $id) {
+                // normally this would be strict-type checking (===) but since the input is "wrong", i have to
+                // do weak type checks
                 return $v;
             }
         }

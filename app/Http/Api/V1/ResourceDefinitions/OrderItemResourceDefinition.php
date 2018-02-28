@@ -28,11 +28,12 @@ class OrderItemResourceDefinition extends ResourceDefinition
             ->visible(true, true)
         ;
 
-        $this->field('price')
+        $this->field('unitPrice')
+            ->display('unit-price')
             ->number()
             ->writeable(true, true)
             ->visible(true, true)
-            ->display('unit-price');
+        ;
 
         // Why tf would you need this anyway?
         $this->field('total')

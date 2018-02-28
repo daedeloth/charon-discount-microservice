@@ -59,4 +59,13 @@ class Category extends Model
         $this->name = $name;
         return $this;
     }
+
+    /**
+     * @param Category $category
+     * @return bool
+     */
+    public function equals(Category $category)
+    {
+        return $this->id == $category->getId();
+    }
 }

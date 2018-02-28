@@ -37,6 +37,13 @@ class CustomerService extends Service
      */
     function toModel($data): Model
     {
-        return new Customer($data);
+        $customer = new Customer();
+
+        $customer->setId(intval($data['id'])); // identifiers should be ints, duh! Unless they are ints, but "1" is NOT AN INT!
+        $customer->setName($data['name']);
+        $customer->setSince(new \DateTime($data['since']));
+        $customer->setRevenue($data['revenue']);
+
+        return $customer;
     }
 }

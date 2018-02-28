@@ -53,6 +53,7 @@ class DiscountController extends ResourceController
 
     /**
      * @throws \CatLab\Charon\Exceptions\InvalidContextAction
+     * @throws \CatLab\Charon\Exceptions\InvalidEntityException
      */
     public function calculateDiscounts()
     {
@@ -76,6 +77,8 @@ class DiscountController extends ResourceController
             }
         }
 
-        return $out;
+        $readContext = $this->getContext(Action::VIEW, [ 'order' => $order ]);
+        $resources = $this->toResources($out, $readContext);
+        return $this->toResponse($resources);
     }
 }

@@ -40,6 +40,14 @@ class OrderItem extends Model
     }
 
     /**
+     * @return Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
      * @param $quantity
      * @return $this
      */
@@ -67,5 +75,29 @@ class OrderItem extends Model
     {
         $this->total = $total;
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @return float
+     */
+    public function getUnitPrice(): float
+    {
+        return $this->unitPrice;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTotal(): float
+    {
+        return $this->total;
     }
 }
