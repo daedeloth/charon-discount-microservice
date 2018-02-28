@@ -21,7 +21,7 @@ class DiscountResourceDefinition extends ResourceDefinition
         $this->field('reason')
             ->visible(true, true);
 
-        $this->field('discount:{context.order}')
+        $this->field('updatedDiscount:{context.order}')
             ->display('discount')
             ->visible(true, true);
     }

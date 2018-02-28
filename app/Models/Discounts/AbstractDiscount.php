@@ -5,6 +5,7 @@ namespace App\Models\Discounts;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 
 /**
  * Class Discount
@@ -36,7 +37,19 @@ abstract class AbstractDiscount
      * @param Order $order
      * @return float
      */
-    public abstract function getDiscount(Order $order): float;
+    public abstract function calculateDiscount(Order $order): float;
+
+    /**
+     * @param Order $order
+     * @return float
+     */
+    public function getUpdatedDiscount(Order $order)
+    {
+        $discount = $this->calculateDiscount($order);
+        $order->setTotal($order->getTotal() - $discount);
+
+        return $discount;
+    }
 
     /**
      * @return string
@@ -85,6 +98,11 @@ abstract class AbstractDiscount
         return $this->round($total);
     }
 
+    /**
+     * @param Order $order
+     * @param $amount
+     * @return OrderItem[]
+     */
     protected function getNthCheapestItems(Order $order, $amount)
     {
         $items = $this->getCheapestItems($order);
@@ -92,12 +110,15 @@ abstract class AbstractDiscount
         // we now have the items sorted on price, so now let's give away free items.
         // not very performanty, but very easily; give one item away at a time.
         // need more performance? Pay actual money.
+
+        /** @var OrderItem[] $out */
         $out = [];
         for ($i = 0; $i < $amount; $i ++) {
-            if (isset($quantifiedItems[$i])) {
-                $out [] = $items[$i]->getUnitPrice();
+            if (isset($items[$i])) {
+                $out[] = $items[$i];
             }
         }
+
         return $out;
     }
 
@@ -115,7 +136,7 @@ abstract class AbstractDiscount
         $items = $order->getOrderItems();
 
         usort($items, function(OrderItem $a, OrderItem $b) {
-            return $b->getUnitPrice() - $a->getUnitPrice();
+            return $a->getUnitPrice() - $b->getUnitPrice();
         });
 
         // add to a temporary array for easy access

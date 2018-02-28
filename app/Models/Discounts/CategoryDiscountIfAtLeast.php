@@ -65,7 +65,7 @@ class CategoryDiscountIfAtLeast extends AbstractDiscount
                 $total += $orderItem->getQuantity();
             }
         }
-        return $this->round($total);
+        return $total;
     }
 
     /**
@@ -81,13 +81,13 @@ class CategoryDiscountIfAtLeast extends AbstractDiscount
      * @param Order $order
      * @return float
      */
-    public function getDiscount(Order $order): float
+    public function calculateDiscount(Order $order): float
     {
         $items = $this->getCheapestItems($order);
 
         // just return the first.
         foreach ($items as $v) {
-            return $v->getUnitPrice() * $this->freePercentage;
+            return $this->round($v->getUnitPrice() * $this->freePercentage);
         }
         return 0;
     }

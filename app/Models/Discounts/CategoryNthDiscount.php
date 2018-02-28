@@ -4,7 +4,6 @@ namespace App\Models\Discounts;
 
 use App\Models\Category;
 use App\Models\Order;
-use App\Models\OrderItem;
 
 /**
  * Class CategoryNthDiscount
@@ -41,7 +40,7 @@ class CategoryNthDiscount extends AbstractDiscount
      */
     public function __construct(Category $category, $requiredAmount, $freeAmount, $discountPercentage)
     {
-        parent::__construct($requiredAmount . 'th item free on all ' . $category->getName());
+        parent::__construct($requiredAmount . 'th item ' . ($freeAmount * 100) . '% off on all ' . $category->getName());
 
         $this->category = $category;
         $this->requiredAmount = $requiredAmount;
@@ -54,14 +53,17 @@ class CategoryNthDiscount extends AbstractDiscount
      * @param Order $order
      * @return float
      */
-    public function getDiscount(Order $order): float
+    public function calculateDiscount(Order $order): float
     {
+        $amount = floor ($this->getTotalOrderedAmountFromCategory($order, $this->category) / $this->requiredAmount);
+
         $discount = 0;
-        foreach ($this->getNthCheapestItems($order, $this->requiredAmount) as $v) {
-            $discount += $v * $this->discountPercentage;
+        foreach ($this->getNthCheapestItems($order, $amount) as $v) {
+            $unitPrice = $v->getUnitPrice();
+            $discount += $unitPrice * $this->discountPercentage;
         }
 
-        return $discount;
+        return $this->round($discount);
     }
 
     /**

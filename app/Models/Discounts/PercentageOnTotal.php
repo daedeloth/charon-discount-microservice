@@ -37,7 +37,7 @@ class PercentageOnTotal extends AbstractDiscount
      * @param Order $order
      * @return float
      */
-    public function getDiscount(Order $order): float
+    public function calculateDiscount(Order $order): float
     {
         return $this->round($order->getTotal() * $this->percentageDiscount);
     }
