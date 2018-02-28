@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a62f4eda67db946407d7e130aa947425",
+    "content-hash": "c12c32b530d615322a63cc6a4dd4eac5",
     "packages": [
         {
             "name": "catlabinteractive/base",
@@ -41,6 +41,46 @@
             ],
             "description": "A few classes that you always need.",
             "time": "2017-07-11T12:33:53+00:00"
+        },
+        {
+            "name": "catlabinteractive/base-laravel",
+            "version": "v5.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CatLabInteractive/base-laravel.git",
+                "reference": "7ea7fdbecf9db47f1f00c54446a85960a84e9b98"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CatLabInteractive/base-laravel/zipball/7ea7fdbecf9db47f1f00c54446a85960a84e9b98",
+                "reference": "7ea7fdbecf9db47f1f00c54446a85960a84e9b98",
+                "shasum": ""
+            },
+            "require": {
+                "catlabinteractive/base": "^1.0.1"
+            },
+            "require-dev": {
+                "laravel/framework": "5.2.*",
+                "phpunit/phpunit": "5.3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CatLab\\Laravel\\": "src/CatLab/Laravel"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thijs Van der Schaeghe",
+                    "email": "info@catlab.be"
+                }
+            ],
+            "description": "Transformer between catlab base and laravel.",
+            "time": "2017-05-30T13:52:29+00:00"
         },
         {
             "name": "catlabinteractive/charon",
@@ -81,6 +121,47 @@
             ],
             "description": "Charon is a framework for building self documented RESTfull API's.",
             "time": "2018-02-28T10:39:36+00:00"
+        },
+        {
+            "name": "catlabinteractive/charon-laravel",
+            "version": "v1.0.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CatLabInteractive/charon-laravel.git",
+                "reference": "9cbc7207671a38837c034c7fd1efea6a060db0bd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CatLabInteractive/charon-laravel/zipball/9cbc7207671a38837c034c7fd1efea6a060db0bd",
+                "reference": "9cbc7207671a38837c034c7fd1efea6a060db0bd",
+                "shasum": ""
+            },
+            "require": {
+                "catlabinteractive/base-laravel": "^5.2",
+                "catlabinteractive/charon": "~1.0.10"
+            },
+            "require-dev": {
+                "laravel/framework": "5.2.*",
+                "phpunit/phpunit": "5.3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CatLab\\Charon\\Laravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thijs Van der Schaeghe",
+                    "email": "info@catlab.be"
+                }
+            ],
+            "description": "Laravel specific libraries for Charon.",
+            "time": "2018-02-25T11:12:50+00:00"
         },
         {
             "name": "catlabinteractive/requirements",
