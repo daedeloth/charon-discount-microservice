@@ -26,8 +26,6 @@ $routes->group(
         'suffix' => '.{format?}',
         'namespace' => 'Api\V1\Controllers',
         'middleware' => [
-            'web',
-            'auth', // temporary
             \CatLab\Charon\Laravel\Middleware\ResourceToOutput::class
         ],
         'security' => [
