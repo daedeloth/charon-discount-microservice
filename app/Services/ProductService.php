@@ -21,7 +21,7 @@ class ProductService extends Service
 
         // Going very dirty route just to get this working.
         // There should be some error handling here, but hey, I'm doing this for free.
-        $this->loadData('customers.json');
+        $this->loadData('products.json');
     }
 
     /**

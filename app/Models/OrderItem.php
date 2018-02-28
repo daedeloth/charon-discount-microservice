@@ -12,26 +12,29 @@ class OrderItem extends Model
     /**
      * @var Product
      */
-    private $product;
+    protected $product;
 
     /**
      * @var int
      */
-    private $quantity;
+    protected $quantity;
 
     /**
      * @var float
      */
-    private $unitPrice;
+    protected $unitPrice;
 
     /**
      * @var float
      */
-    private $total;
+    protected $total;
 
+    /**
+     * @param $id
+     */
     public function setProductId($id)
     {
-        // this could be a singleton
+        // this could be a singleton, but it is not.
         $productService = new ProductService();
         $this->product = $productService->getFromId($id);
     }

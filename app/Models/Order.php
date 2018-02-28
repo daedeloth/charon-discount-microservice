@@ -44,12 +44,13 @@ class Order extends Model
     }
 
     /**
-     * @param array $attributes
+     * @param array $items
      */
-    public function addOrderItems(array $attributes)
+    public function addOrderItems(array $items)
     {
-        $item = new OrderItem();
-        $this->orderItems[] = $item;
+        foreach ($items as $v) {
+            $this->orderItems[] = $v;
+        }
     }
 
     /**

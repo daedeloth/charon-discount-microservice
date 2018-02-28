@@ -31,7 +31,8 @@ abstract class Service
     protected function loadData($file)
     {
         $data = json_decode(
-            file_get_contents(base_path('data/' . $file))
+            file_get_contents(base_path('data/' . $file)),
+            true
         );
 
         foreach ($data as $v) {
@@ -54,7 +55,12 @@ abstract class Service
      */
     public function getFromId($id)
     {
-        return $this->items->where('id', '=', $id)->first();
+        foreach ($this->items as $v) {
+            if ($v->getId() === $id) {
+                return $v;
+            }
+        }
+        return null;
     }
 
     /**
