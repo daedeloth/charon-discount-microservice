@@ -57,7 +57,7 @@ class DescriptionController extends Controller
      */
     protected function swaggerResponse()
     {
-        $builder = new SwaggerBuilder(Request::getHttpHost(), '/');
+        $builder = new SwaggerBuilder(\Request::getHttpHost(), '/');
 
         $builder
             ->setTitle('Charon Amazing Discount Calculator API')
