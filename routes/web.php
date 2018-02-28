@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return redirect('docs');
 });
+
+
+Route::get('docs', 'SwaggerController@swagger');

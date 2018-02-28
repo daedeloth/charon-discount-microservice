@@ -5,7 +5,16 @@ Why is this overengineered? Because I wanted to use Charon.
 
 Installation
 ------------
-```composer install``` should do the trick.
+```
+composer install
+bower install
+```
+ 
+...should do the trick.
+
+Why bower? Yea, should switch to npm. But this is a test, not a production project.
+
+(Yes I also user bower for production projects.)
 
 Usage
 -----
