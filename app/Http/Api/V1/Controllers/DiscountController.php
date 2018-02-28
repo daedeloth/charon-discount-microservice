@@ -7,6 +7,7 @@ use App\Http\Api\V1\ResourceDefinitions\DiscountResourceDefinition;
 use App\Http\Api\V1\ResourceDefinitions\OrderResourceDefinition;
 use App\Http\Middleware\TransformOrderToCharon;
 use App\Models\Order;
+use App\Services\DiscountService;
 use CatLab\Charon\Collections\RouteCollection;
 use CatLab\Charon\Enums\Action;
 
@@ -61,9 +62,20 @@ class DiscountController extends ResourceController
         $resource = $this->bodyToResource($context, OrderResourceDefinition::class);
 
         // Turn resources into entities, which we like to work with.
-        $entity = $this->toEntity($resource, $context, new Order(), OrderResourceDefinition::class);
+        $order = $this->toEntity($resource, $context, new Order(), OrderResourceDefinition::class);
 
+        // We now have entities (= models), so we finally have something we can work with.
+        //$orderItems = $order->getOrderItems();
 
-        print_r($entity);
+        $out = [];
+
+        $discountService = new DiscountService();
+        foreach ($discountService->getAll() as $discount) {
+            if ($discount->isApplicable($order)) {
+                $out[] = $discount;
+            }
+        }
+
+        return $out;
     }
 }

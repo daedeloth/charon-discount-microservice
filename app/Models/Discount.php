@@ -6,7 +6,14 @@ namespace App\Models;
  * Class Discount
  * @package App\Models
  */
-class Discount extends Model
+class Discount
 {
-
+    /**
+     * @param Order $order
+     * @return bool
+     */
+    public function isApplicable(Order $order)
+    {
+        return false;
+    }
 }
