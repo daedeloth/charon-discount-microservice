@@ -15,3 +15,6 @@ Authentication
 --------------
 None. Free for all. No authentication, no throttling.
 
+Tests
+-----
+None.
