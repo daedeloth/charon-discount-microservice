@@ -66,8 +66,8 @@ class DiscountController extends ResourceController
         $order = $this->toEntity($resource, $context, new Order(), OrderResourceDefinition::class);
 
         // We now have entities (= models), so we finally have something we can work with.
-        //$orderItems = $order->getOrderItems();
 
+        // Collect all discounts
         $out = [];
 
         $discountService = new DiscountService();
@@ -77,8 +77,16 @@ class DiscountController extends ResourceController
             }
         }
 
+        // We have all applicable discounts, now translate to resources again
         $readContext = $this->getContext(Action::VIEW, [ 'order' => $order ]);
         $resources = $this->toResources($out, $readContext);
+
+        // And send to the client.
         return $this->toResponse($resources);
+
+        // NOTE: It wouldn't be too hard to return the final order price here, but
+        // since it wasn't requested I'm just returning all the discounts (and their final amount)
+        // in a list. It suffices to just sum all "discount" properties of each discount item
+        // in order to receive the full discount.
     }
 }
