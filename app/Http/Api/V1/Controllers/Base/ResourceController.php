@@ -2,6 +2,7 @@
 
 namespace App\Http\Api\V1\Controllers\Base;
 
+use App\Http\Api\TeamleaderInputParser;
 use App\Http\Controllers\Controller;
 use CatLab\Charon\Enums\Action;
 use CatLab\Charon\Laravel\InputParsers\JsonBodyInputParser;
@@ -51,7 +52,7 @@ abstract class ResourceController extends Controller
      */
     protected function setInputParsers(\CatLab\Charon\Models\Context $context)
     {
-        $context->addInputParser(JsonBodyInputParser::class);
-        $context->addInputParser(PostInputParser::class);
+        $context->addInputParser(TeamleaderInputParser::class);
+        //$context->addInputParser(PostInputParser::class);
     }
 }

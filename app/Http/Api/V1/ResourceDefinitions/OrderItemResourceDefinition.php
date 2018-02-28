@@ -16,7 +16,7 @@ class OrderItemResourceDefinition extends ResourceDefinition
         parent::__construct(OrderItem::class);
 
         $this->field('productId')
-            ->int()
+            ->string()
             ->writeable(true, true)
             ->visible(true, true)
             ->display('product_id');

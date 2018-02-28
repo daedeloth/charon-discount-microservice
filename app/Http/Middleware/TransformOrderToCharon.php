@@ -34,13 +34,17 @@ class TransformOrderToCharon
         if ($content) {
             // Look for the "items" part.
             if (isset($content['items'])) {
-                $content['items'] = [
+                $content['orderItems'] = [
                     'items' => $content['items']
                 ];
             }
+
+            unset($content['items']);
         }
 
         //Request::instance()->setContent(json_encode($content));
+
+        $request->attributes->set('teamleader-input-body', json_encode($content));
 
         return $next($request);
     }

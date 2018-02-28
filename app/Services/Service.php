@@ -52,7 +52,7 @@ abstract class Service
      * @param $id
      * @return Model|null
      */
-    protected function getFromId($id)
+    public function getFromId($id)
     {
         return $this->items->where('id', '=', $id)->first();
     }

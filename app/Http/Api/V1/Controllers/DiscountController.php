@@ -6,7 +6,9 @@ use App\Http\Api\V1\Controllers\Base\ResourceController;
 use App\Http\Api\V1\ResourceDefinitions\DiscountResourceDefinition;
 use App\Http\Api\V1\ResourceDefinitions\OrderResourceDefinition;
 use App\Http\Middleware\TransformOrderToCharon;
+use App\Models\Order;
 use CatLab\Charon\Collections\RouteCollection;
+use CatLab\Charon\Enums\Action;
 
 /**
  * Class DiscountController
@@ -49,10 +51,19 @@ class DiscountController extends ResourceController
     }
 
     /**
-     *
+     * @throws \CatLab\Charon\Exceptions\InvalidContextAction
      */
     public function calculateDiscounts()
     {
+        $context = $this->getContext(Action::CREATE);
 
+        // Turn json body into a resource
+        $resource = $this->bodyToResource($context, OrderResourceDefinition::class);
+
+        // Turn resources into entities, which we like to work with.
+        $entity = $this->toEntity($resource, $context, new Order(), OrderResourceDefinition::class);
+
+
+        print_r($entity);
     }
 }
