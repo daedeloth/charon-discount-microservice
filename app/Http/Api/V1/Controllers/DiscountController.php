@@ -5,6 +5,7 @@ namespace App\Http\Api\V1\Controllers;
 use App\Http\Api\V1\Controllers\Base\ResourceController;
 use App\Http\Api\V1\ResourceDefinitions\DiscountResourceDefinition;
 use App\Http\Api\V1\ResourceDefinitions\OrderResourceDefinition;
+use App\Http\Middleware\TransformOrderToCharon;
 use CatLab\Charon\Collections\RouteCollection;
 
 /**
@@ -25,14 +26,16 @@ class DiscountController extends ResourceController
         // specified within the group.
         // This is a feature I stole from Laravel.
         $routes->group(
-            [],
+            [
+                'middleware' => [ TransformOrderToCharon::class ]
+            ],
             function(RouteCollection $routes) {
 
                 $routes->post('calculateDiscounts', 'DiscountController@calculateDiscounts')
                     ->summary('Calculate discounts for a given order.')
                     ->parameters()->resource(OrderResourceDefinition::class)
-                    ->returns()->many(DiscountResourceDefinition::class);
-
+                    ->returns()->many(DiscountResourceDefinition::class)
+                ;
             }
         )->tag('discounts');
     }
