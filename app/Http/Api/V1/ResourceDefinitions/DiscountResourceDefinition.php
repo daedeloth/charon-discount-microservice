@@ -22,6 +22,7 @@ class DiscountResourceDefinition extends ResourceDefinition
             ->visible(true, true);
 
         $this->field('updatedDiscount:{context.order}')
+            ->number()
             ->display('discount')
             ->visible(true, true);
     }
