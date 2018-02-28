@@ -39,11 +39,6 @@ abstract class ResourceController extends Controller
         /** @var Context $context */
         $context = $this->traitGetContext($action, $parameters);
 
-        $user = \Auth::getUser();
-        if ($user) {
-            $context->setParameter('currentUser', $user);
-        }
-
         // NO! We don't want pagination. Project is too small.
         //$context->addProcessor(new PaginationProcessor(CursorPaginationBuilder::class));
 

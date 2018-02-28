@@ -38,6 +38,14 @@ class DiscountController extends ResourceController
     }
 
     /**
+     * DiscountController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct(DiscountResourceDefinition::class);
+    }
+
+    /**
      *
      */
     public function calculateDiscounts()
