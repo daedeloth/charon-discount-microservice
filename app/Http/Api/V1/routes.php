@@ -27,14 +27,14 @@ $routes->group(
         'namespace' => 'Api\V1\Controllers',
         'middleware' => [
             \CatLab\Charon\Laravel\Middleware\ResourceToOutput::class
-        ],
+        ],/*
         'security' => [
             [
                 'oauth2' => [
                     'full'
                 ]
             ]
-        ]
+        ]*/
     ],
     function(RouteCollection $routes)
     {
