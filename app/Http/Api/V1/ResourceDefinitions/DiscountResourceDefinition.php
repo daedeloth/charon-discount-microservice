@@ -17,5 +17,7 @@ class DiscountResourceDefinition extends ResourceDefinition
     public function __construct()
     {
         parent::__construct(Discount::class);
+
+
     }
 }

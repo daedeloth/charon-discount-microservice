@@ -18,6 +18,23 @@ class OrderResourceDefinition extends ResourceDefinition
     {
         parent::__construct(Order::class);
 
+        $this->identifier('id')
+            ->writeable(true, true);
 
+        $this->field('customerId')
+            ->display('customer-id')
+            ->int()
+            ->writeable(true, true)
+            ->visible(true, true);
+
+        $this->relationship('items', OrderItemResourceDefinition::class)
+            ->display('items')
+            ->writeable(true, true)
+            ->visible(true, true);
+
+        $this->field('total')
+            ->writeable(true, true)
+            ->number()
+            ->visible(true, true);
     }
 }
