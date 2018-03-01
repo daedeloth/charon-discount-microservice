@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Services\DiscountService;
 use CatLab\Charon\Collections\RouteCollection;
 use CatLab\Charon\Enums\Action;
+use CatLab\Charon\Models\Context;
 
 /**
  * Class DiscountController
@@ -37,7 +38,7 @@ class DiscountController extends ResourceController
                 $routes->post('calculateDiscounts', 'DiscountController@calculateDiscounts')
                     ->summary('Calculate discounts for a given order.')
                     ->parameters()->resource(OrderResourceDefinition::class)
-                    ->returns()->many(DiscountResourceDefinition::class)
+                    ->returns()->many(DiscountResourceDefinition::class, Action::INDEX)
                 ;
             }
         )->tag('discounts');
