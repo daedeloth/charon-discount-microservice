@@ -37,6 +37,10 @@ class OrderItem extends Model
         // this could be a singleton, but it is not.
         $productService = new ProductService();
         $this->product = $productService->getFromId($id);
+
+        if (!$this->product) {
+            abort(404, 'Product not found.');
+        }
     }
 
     /**

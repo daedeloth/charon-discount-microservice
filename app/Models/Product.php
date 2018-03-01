@@ -45,6 +45,10 @@ class Product extends Model
         $this->id = $attributes['id'];
         $this->description = $attributes['description'];
         $this->category = $categoryService->getFromId($attributes['category']);
+        if (!$this->category) {
+            abort(404, 'Category not found');
+        }
+
         $this->price = $attributes['price'];
     }
 

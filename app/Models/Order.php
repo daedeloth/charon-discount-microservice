@@ -34,6 +34,9 @@ class Order extends Model
         // Singeltones could be used, yes! Or a smarter "service" factory.
         $customerService = new CustomerService();
         $customer = $customerService->getFromId($id);
+        if (!$customer) {
+            abort(404, 'Customer not found');
+        }
 
         $this->customer = $customer;
         return $this;
